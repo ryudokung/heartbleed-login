@@ -15,15 +15,11 @@ RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/
  dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
-RUN apt-get update -y 
-RUN apt-get install -y php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
-RUN wget -P /var/www/html/ https://wordpress.org/wordpress-latest.tar.gz && tar -xvf /var/www/html/wordpress-latest.tar.gz && \
-    mv /wordpress/* /var/www/html/
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Setup vulnerable web server and enable SSL based Apache instance
-COPY wp-config.php /var/www/html/
+ADD app /var/www/html/
 RUN sed -i 's/^NameVirtualHost/#NameVirtualHost/g' /etc/apache2/ports.conf && \
     sed -i 's/^Listen/#Listen/g' /etc/apache2/ports.conf 
 RUN a2enmod ssl && \
