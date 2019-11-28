@@ -15,6 +15,7 @@ RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/
  dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+RUN apt-get update -y 
 
 ENV DEBIAN_FRONTEND noninteractive
 
