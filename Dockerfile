@@ -4,7 +4,7 @@ FROM debian:jessie
 RUN apt-get update -y && apt-get dist-upgrade -y
 
 # Install packages 
-RUN apt-get install -y wget
+RUN apt-get install -y wget apache2
 RUN apt-get install -y apt-transport-https lsb-release ca-certificates
 
 # Install vulnerable versions from wayback/snapshot archive
@@ -13,9 +13,6 @@ RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/
 
 RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb && \
  dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb
-RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
-RUN apt-get update -y 
 
 ENV DEBIAN_FRONTEND noninteractive
 
