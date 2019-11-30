@@ -25,7 +25,7 @@ RUN a2enmod ssl && \
     a2ensite default-ssl
 
 # Clean up 
-RUN apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/www/html/index.html
+RUN apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Expose the port for usage with the docker -P switch
 EXPOSE 443
